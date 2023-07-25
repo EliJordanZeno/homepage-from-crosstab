@@ -4,7 +4,6 @@ date: 7/25/2023
 This script generates a formatted 'homepage' from the downloaded crosstab data from Mercury.
 The default input file is called 'test.xlsx', and the default output file is 'test_output.xlsx'.
 These can be changed at the bottom of this script.
-
 '''
 
 
@@ -23,7 +22,7 @@ class Question:
     ''' 
     def __init__(self,raw): 
         #parse raw into standard parameters 
-        main = raw.split(":",1)
+        main = raw.split(":",1) # if split is more than 1, questions with commas will not be captured
         if _DEBUG:
             print(main)
         self.number_internal = main[0] 
@@ -63,6 +62,10 @@ class Survey:
     Methods: 
 
     output_to_file(file_name) - cleans questions from input xlsx file and outputs to file_name 
+
+    Properties:
+
+    obj_dict - the dictionary that organizes and stores all of the questions in the crosstab file
 
     """ 
 
