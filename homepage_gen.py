@@ -22,7 +22,7 @@ class Question:
     ''' 
     def __init__(self,raw): 
         #parse raw into standard parameters 
-        main = raw.split(":",1) # if split is more than 1, questions with commas will not be captured
+        main = raw.split(":",1) # if split is more than 1, questions with colons will not be captured
         if _DEBUG:
             print(main)
         self.number_internal = main[0] 
@@ -71,14 +71,15 @@ class Survey:
 
     def __init__(self,file_name): 
 
-        regex = r"\w{3,4}:\sQ|\w{3}:\sADD|\w{3}:\sP" #finds all strings with Question format 
-        df = pd.read_excel(file_name, sheet_name='Crosstab').iloc[:,0]
-        selected_cells = df[df.str.contains(regex, regex=True, na=False,case=True)] 
+        regex = r"\w{3,4}:\sQ|\w{3}:\sADD|\w{3}:\sP" #finds all strings with Question format
+        self.fullDF = pd.read_excel(file_name, sheet_name='Crosstab')
+        self.df = self.fullDF.iloc[:,0]
+        selected_cells = self.df[self.df.str.contains(regex, regex=True, na=False,case=True)] 
         questions_list = selected_cells.to_list() 
 
         if _DEBUG:
             pd.options.display.max_rows = 999
-            print(df)
+            print(self.df)
             #print(selected_cells)
         self.obj_dict = {} #dictionary storing questions by number 
 
@@ -118,9 +119,11 @@ class Survey:
 
         if _DEBUG: 
             print(final) 
-
-        final.to_excel(file_name,index=False) 
+        writer = pd.ExcelWriter(file_name)
+        final.to_excel(writer,sheet_name="Homepage",index=False) 
+        self.fullDF.to_excel(writer,sheet_name="Crosstab",index=False)
+        writer._save()
 
 if __name__ == "__main__": 
-    s = Survey("./test.xlsx") #input file 
-    s.output_to_file("./test_output.xlsx") #output file 
+    s = Survey("./KHC_ECHO_RAW.xlsx") #input file 
+    s.output_to_file("./KHC_ECHO_HOMEPAGE.xlsx") #output file 
