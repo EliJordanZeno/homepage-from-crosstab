@@ -9,6 +9,7 @@ These can be changed at the bottom of this script.
 
 import pandas as pd 
 import numpy as np 
+import openpyxl as pxl
 import re
 
 _DEBUG = False #used to print data in use 
@@ -70,16 +71,20 @@ class Survey:
     """ 
 
     def __init__(self,file_name): 
-
         regex = r"\w{3,4}:\sQ|\w{3}:\sADD|\w{3}:\sP" #finds all strings with Question format
-        self.fullDF = pd.read_excel(file_name, sheet_name='Crosstab')
-        self.df = self.fullDF.iloc[:,0]
-        selected_cells = self.df[self.df.str.contains(regex, regex=True, na=False,case=True)] 
+        df = pd.read_excel(file_name, sheet_name='Crosstab').iloc[:,0]
+        wb = pxl.load_workbook(filename=file_name)
+        sheet = wb.active
+        # for cell in sheet["A"]:
+        #     if bool(re.search(regex,cell.value)):
+        #         selected_cells.append(cell.value)
+        selected_cells = df[df.str.contains(regex, regex=True, na=False,case=True)] 
+
         questions_list = selected_cells.to_list() 
 
         if _DEBUG:
             pd.options.display.max_rows = 999
-            print(self.df)
+            print(df)
             #print(selected_cells)
         self.obj_dict = {} #dictionary storing questions by number 
 
@@ -121,9 +126,8 @@ class Survey:
             print(final) 
         writer = pd.ExcelWriter(file_name)
         final.to_excel(writer,sheet_name="Homepage",index=False) 
-        self.fullDF.to_excel(writer,sheet_name="Crosstab",index=False)
         writer._save()
 
 if __name__ == "__main__": 
-    s = Survey("./KHC_ECHO_RAW.xlsx") #input file 
-    s.output_to_file("./KHC_ECHO_HOMEPAGE.xlsx") #output file 
+    s = Survey("./EE_RAW.xlsx") #input file 
+    s.output_to_file("./EE_HOMEPAGE.xlsx") #output file 
