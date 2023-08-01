@@ -10,6 +10,7 @@ These can be changed at the bottom of this script.
 import pandas as pd 
 import numpy as np 
 import openpyxl as pxl
+from openpyxl_test import copy_sheet_attributes,copy_sheet,copy_cells
 import re
 
 _DEBUG = False #used to print data in use 
@@ -128,6 +129,17 @@ class Survey:
         final.to_excel(writer,sheet_name="Homepage",index=False) 
         writer._save()
 
-if __name__ == "__main__": 
-    s = Survey("./EE_RAW.xlsx") #input file 
-    s.output_to_file("./EE_HOMEPAGE.xlsx") #output file 
+if __name__ == "__main__":
+    source_file_path = "./EE_RAW_FINAL.xlsx" 
+    output_file_path = "./test_file.xlsx"
+    s = Survey(source_file_path) 
+    s.output_to_file(output_file_path)
+
+    outputWB = pxl.load_workbook(filename=output_file_path)
+    output_sheet = outputWB.create_sheet("Crosstab")
+
+    inputWB = pxl.load_workbook(filename=source_file_path)
+    input_sheet = inputWB["Crosstab"]
+
+    copy_sheet(input_sheet,output_sheet)
+    outputWB.save("test_file.xlsx") 
