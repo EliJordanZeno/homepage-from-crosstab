@@ -12,7 +12,7 @@
     <li>Activate the virtual environment in the command line
     <ul>
     <li>Mac: source crosstab_venv/bin/activate</li>
-    <li>Windows: I'm not sure, I think you have to make a new one. <a href="https://docs.python.org/3/library/venv.html">Here's the documentation</a> </li>
+    <li>Windows: I'm not sure, I think you have to make a new one. <a href="https://docs.python.org/3/library/venv.html">Here's the documentation</a></li>
     </ul>
     <li>Ensure all the required packages are installed using <b>pip install -r requirements.txt</b></li>
     <li>Now, move the downloaded (source) crosstab file into the same folder as crosstab_gen.py</li>
