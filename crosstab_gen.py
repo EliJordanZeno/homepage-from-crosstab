@@ -1,16 +1,16 @@
 '''
 author: Eli Jordan @ZenoGroup
 date: 7/25/2023
-This script generates a formatted 'homepage' from the downloaded crosstab data from Mercury.
-The default input file is called 'test.xlsx', and the default output file is 'test_output.xlsx'.
-These can be changed at the bottom of this script.
+This script generates a formatted 'Homepage' and 'Crosstab' sheet from the downloaded crosstab data from Mercury.
+Make sure to check the input file before running this script. (delete screener and demo Questions)
+garbage in —— garbage out
 '''
 
 
 import pandas as pd 
 import numpy as np 
 import openpyxl as pxl
-from openpyxl_test import copy_sheet_attributes,copy_sheet,copy_cells
+from copy_xl import copy_sheet
 import re
 
 _DEBUG = False #used to print data in use 
@@ -130,11 +130,15 @@ class Survey:
         writer._save()
 
 if __name__ == "__main__":
-    source_file_path = "./EE_RAW_FINAL.xlsx" 
-    output_file_path = "./test_file.xlsx"
+
+    source_file_path = "./EE_RAW_FINAL.xlsx" # input file (from Mercury)
+    output_file_path = "./test_file.xlsx" # output file
+
+    #generates homepage cells
     s = Survey(source_file_path) 
     s.output_to_file(output_file_path)
 
+    #copies data from source file to output file
     outputWB = pxl.load_workbook(filename=output_file_path)
     output_sheet = outputWB.create_sheet("Crosstab")
 

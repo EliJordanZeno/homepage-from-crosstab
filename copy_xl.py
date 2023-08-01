@@ -1,9 +1,5 @@
 '''
 Test file for openpyxl functionality to preserve / edit excel formatting
-
-1. Generate homepage (homepage_gen.py)
-2. Copy crosstab sheet from input file to homepage (output) file
-3. 
 '''
 
 
@@ -12,7 +8,7 @@ from copy import copy
 import re
 
 def copy_sheet(source_sheet, target_sheet):
-    copy_cells(source_sheet, target_sheet)  # copy all the cel values and styles
+    copy_cells(source_sheet, target_sheet)  # copy all the cell values and styles
     copy_sheet_attributes(source_sheet, target_sheet)
 
 
