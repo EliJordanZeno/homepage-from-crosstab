@@ -16,6 +16,9 @@
     </ul>
     <li>Ensure all the required packages are installed using <b>pip install -r requirements.txt</b></li>
     <li>Now, move the downloaded (source) crosstab file into the same folder as crosstab_gen.py</li>
+    <ul><li>Remember to clear out any questions you don't want to show up in the final workbook (screeners, demos)</li>
+    <li>And rename the audiences</li>
+    </ul>
     <li>Finally, open <em>crosstab_gen.py</em> and change the file paths at the bottom of the file to reflect the files you are working with (input and output)</li>
     <li>Now run the script either from the command line with <em>python crosstab_gen.py</em> or by clicking the play button in VSCode</li>
     <li>You should now have a new file that has the name you gave it in the script.</li>

@@ -146,4 +146,6 @@ if __name__ == "__main__":
     input_sheet = inputWB["Crosstab"]
 
     copy_sheet(input_sheet,output_sheet)
+
+    # link creation, and question formatting goes here
     outputWB.save("test_file.xlsx") 
