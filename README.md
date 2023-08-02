@@ -23,6 +23,7 @@
     <li>Now run the script either from the command line with <em>python crosstab_gen.py</em> or by clicking the play button in VSCode</li>
     <li>You should now have a new file that has the name you gave it in the script.</li>
     </li>
+    <li>This file is now ready to run the <u>links</u> and <u>formatting</u> macros found <a href="https://djeholdingsdrive.sharepoint.com/:f:/r/sites/SPTeamRepo2.0/Shared%20Documents/8.%20Innovation%20+%20Development/S+P%20Custom%20Code/Crosstabs%20Generation%20Macros?csf=1&web=1&e=nxJDj0">here</a></li>
 <ol>
 
 <h3>PLEASE BRANCH ANY CHANGES</h3>
