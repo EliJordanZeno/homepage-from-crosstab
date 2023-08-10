@@ -132,18 +132,37 @@ class Survey:
         writer._save()
 
 def create_links(workbook:pxl.Workbook):
+    regex = r"\w{3,4}:\sQ|\w{3}:\sADD|\w{3}:\sP" # for finding formatted Questions
     #finding cells with Q or O and adding them to a dict with the form:
     # {
     # Q##O: CellObject
     # }
     # do this for both homepage and crosstab
     # iterate over the keys of dict (either one they should be the same) and add link to home page cell
-    pass
+
+    home_sheet = workbook["Homepage"]
+    crosstab_sheet = workbook["Crosstab"]
+
+    questions = home_sheet['A:B']
+    question_data = crosstab_sheet["A"]
+    homepage_dict = {}
+    for column in questions:
+        print(column)
+        for i,cell in enumerate(column,1):
+            if cell.value:
+                if column[i+1].value: # no options
+                    print(cell.value)
+                    pass
+                else: #definitely has options
+                    pass
+                work_arr = cell.value.split(":",1)
+                homepage_dict[work_arr[0]] = cell
+    print(homepage_dict)
 
 if __name__ == "__main__":
 
-    source_file_path = "./EE_RAW_FINAL.xlsx" # input file (from Mercury)
-    output_file_path = "./test_file.xlsx" # output file
+    source_file_path = "./EE_RAW_NEW_Options_Format.xlsx" # input file (from Mercury), after checking typos and formatting
+    output_file_path = "./EE_NEW_FORMAT.xlsx" # output file
 
     #generates homepage cells
     s = Survey(source_file_path) 
@@ -158,6 +177,6 @@ if __name__ == "__main__":
 
     copy_sheet(input_sheet,output_sheet)
 
-    create_links(output_sheet)
+    #create_links(outputWB)
     # link creation, and question formatting goes here
-    outputWB.save("test_file.xlsx") 
+    outputWB.save(output_file_path)
