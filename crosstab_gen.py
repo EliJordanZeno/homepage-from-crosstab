@@ -161,7 +161,7 @@ def create_links(workbook:pxl.Workbook):
 
 if __name__ == "__main__":
 
-    source_file_path = "./EE_RAW_NEW_Options_Format.xlsx" # input file (from Mercury), after checking typos and formatting
+    source_file_path = "./UPDATED_AUDIENCES_RAW.xlsx" # input file (from Mercury), after checking typos and formatting
     output_file_path = "./EE_NEW_FORMAT.xlsx" # output file
 
     #generates homepage cells
