@@ -161,8 +161,8 @@ def create_links(workbook:pxl.Workbook):
 
 if __name__ == "__main__":
 
-    source_file_path = "./UPDATED_AUDIENCES_RAW.xlsx" # input file (from Mercury), after checking typos and formatting
-    output_file_path = "./EE_NEW_FORMAT.xlsx" # output file
+    source_file_path = "Danone_Crosstab.xlsx" # input file (from Mercury), after checking typos and formatting
+    output_file_path = "./Danone_test.xlsx" # output file
 
     #generates homepage cells
     s = Survey(source_file_path) 
